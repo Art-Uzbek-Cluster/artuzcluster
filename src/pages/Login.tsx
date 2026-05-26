@@ -1,22 +1,20 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { loginUser, saveCurrentUser } from "../utils/auth";
+import { useState, type FormEvent } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { loginUser, saveCurrentUser } from '../utils/auth';
+import { useLocale } from '../i18n';
 
-/**
- * Login Page Component
- * Handles user login with email and password
- */
 export function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [message, setMessage] = useState<{
-    type: "success" | "error";
+    type: 'success' | 'error';
     text: string;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useLocale();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setMessage(null);
@@ -26,40 +24,34 @@ export function Login() {
 
     if (result.success && result.data) {
       saveCurrentUser(result.data);
-      setMessage({ type: "success", text: result.message });
+      setMessage({ type: 'success', text: result.message || t.login.success });
       setTimeout(() => {
-        navigate("/");
+        navigate('/');
       }, 1200);
     } else {
-      setMessage({ type: "error", text: result.message });
+      setMessage({ type: 'error', text: result.message || t.login.errorInvalid });
     }
   };
 
   const handleTelegramLogin = () => {
-    // TODO: Implement Telegram OAuth
-    console.log("Telegram login clicked");
+    console.log('Telegram login clicked');
   };
 
   const handleGoogleLogin = () => {
-    // TODO: Implement Google OAuth
-    console.log("Google login clicked");
+    console.log('Google login clicked');
   };
 
   const handleMailRuLogin = () => {
-    // TODO: Implement Mail.ru OAuth
-    console.log("Mail.ru login clicked");
+    console.log('Mail.ru login clicked');
   };
 
   return (
     <div className="auth-page">
       <div className="auth-panel">
         <div className="auth-hero">
-          <span className="eyebrow">Вход</span>
-          <h1>Войдите в Milly Art. Cluster</h1>
-          <p>
-            Авторизуйтесь быстро через почту или социальные сети, чтобы попасть
-            в творческое сообщество.
-          </p>
+          <span className="eyebrow">{t.login.eyebrow}</span>
+          <h1>{t.login.title}</h1>
+          <p>{t.login.description}</p>
         </div>
 
         <div className="form-container auth-form">
@@ -69,7 +61,7 @@ export function Login() {
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="email">Электронная почта</label>
+              <label htmlFor="email">{t.login.email}</label>
               <input
                 id="email"
                 type="email"
@@ -82,7 +74,7 @@ export function Login() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">Пароль</label>
+              <label htmlFor="password">{t.login.password}</label>
               <input
                 id="password"
                 type="password"
@@ -99,11 +91,11 @@ export function Login() {
               disabled={isLoading}
               className="submit-button"
             >
-              {isLoading ? "Входим..." : "Войти"}
+              {isLoading ? t.login.submitting : t.login.submit}
             </button>
           </form>
 
-          <div className="divider">или</div>
+          <div className="divider">{t.login.or}</div>
 
           <div className="social-grid">
             <button
@@ -112,7 +104,7 @@ export function Login() {
               disabled={isLoading}
             >
               <span>📱</span>
-              Telegram
+              {t.login.telegram}
             </button>
             <button
               className="btn-social btn-google"
@@ -120,7 +112,7 @@ export function Login() {
               disabled={isLoading}
             >
               <span>🔵</span>
-              Google
+              {t.login.google}
             </button>
             <button
               className="btn-social btn-mailru"
@@ -128,12 +120,12 @@ export function Login() {
               disabled={isLoading}
             >
               <span>📧</span>
-              Mail.ru
+              {t.login.mailru}
             </button>
           </div>
 
           <div className="link-container">
-            Нет аккаунта? <Link to="/register">Зарегистрируйтесь</Link>
+            {t.login.noAccount} <Link to="/register">{t.login.registerLink}</Link>
           </div>
         </div>
       </div>

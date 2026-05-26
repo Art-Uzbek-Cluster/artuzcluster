@@ -1,3 +1,40 @@
+## Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+## Build
+dist/
+build/
+.turbo/
+.parcel-cache/
+.vite/
+
+## Environment
+.env
+.env.*.local
+
+## OS & editors
+.DS_Store
+.vscode/
+.idea/
+
+## Logs
+logs/
+*.log
+
+## Misc
+.cache/
+coverage/
+reports/
+
+## Node distribution and local binaries
+/nodejs/
+
+## Vite / local
+/public/*.local
 # Logs
 logs
 *.log
