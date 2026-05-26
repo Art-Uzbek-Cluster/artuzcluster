@@ -54,7 +54,7 @@ export const ArtistsSection = () => {
 
         {!loading && artists.length > 0 && (
           <motion.div className="portrait-mosaic" initial="hidden" animate="show" variants={containerVariants}>
-            {artists.map((artist, index) => (
+            {artists.map((artist: any, index: number) => (
               <motion.div key={artist.id} className="portrait-tile" variants={itemVariants}>
                 <img src={artist.portraitUrl} alt={`Portrait of ${artist.artistName}`} loading="lazy" />
                 <div className="portrait-caption">
