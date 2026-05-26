@@ -167,7 +167,7 @@ type HomeNewsItem = {
 
 export function Home() {
   const { t } = useLocale();
-  const { hero, about, directions, projects, stats, news, footer } = t.home;
+  const { hero, about, directions, stats, news, footer } = t.home;
   const [activeModal, setActiveModal] = useState<
     'education' | 'opportunities' | 'festivals' | null
   >(null);

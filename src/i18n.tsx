@@ -692,7 +692,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
       theme,
       setLocale,
       toggleTheme: () => setTheme((current) => (current === 'dark' ? 'light' : 'dark')),
-      t: translations[locale],
+      t: translations[locale as keyof typeof translations],
     }),
     [locale, theme]
   );
