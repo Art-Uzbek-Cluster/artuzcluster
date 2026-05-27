@@ -5,6 +5,7 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { LocaleProvider } from "./i18n";
 
+
 /**
  * Main App Component
  * Sets up routing and main layout structure
