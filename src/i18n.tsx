@@ -570,8 +570,8 @@ const translations = {
       footer: {
         contact: 'Contact',
         address: 'Address',
-        email: 'help@artcluster.uz',
-        phone: '+998 XX XXX XX XX',
+        email: 'odylabduhamidov@gmail.com',
+        phone: '+998 95 088 17 60',
         city: 'Tashkent',
         region: 'Republic of Uzbekistan',
       },
