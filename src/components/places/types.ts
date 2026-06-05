@@ -11,7 +11,7 @@ export const PLACES_DATA: PlaceData[] = [
   {
     id: 'academy',
     title: 'Академия',
-    imageUrl: 'public/events/rasm1.png',
+    imageUrl: '/events/rasm1.png',
     description:
       'Ведущий научно-творческий центр страны, осуществляющий подготовку специалистов в области изобразительного искусства, дизайна, декоративно-прикладного искусства и искусствоведения.',
     example: 'Академия художеств Узбекистана',
@@ -20,7 +20,7 @@ export const PLACES_DATA: PlaceData[] = [
   {
     id: 'summer-school',
     title: 'Летние школы',
-    imageUrl: 'public/events/rasm2.png',
+    imageUrl: '/events/rasm2.png',
     description:
       'Образовательная и культурная площадка для студентов Узбекистана и зарубежных стран, направленная на обмен опытом и развитие практических навыков.',
     example: 'Международная летняя школа в Хиве',
@@ -29,7 +29,7 @@ export const PLACES_DATA: PlaceData[] = [
   {
     id: 'festivals',
     title: 'Фестивали',
-    imageUrl: 'public/events/rasm3.png',
+    imageUrl: '/events/rasm3.png',
     description:
       'Международный фестиваль, объединяющий современное искусство, электронную музыку и экологические инициативы.',
     example: 'Stihia Festival (Муйнак)',
@@ -39,7 +39,7 @@ export const PLACES_DATA: PlaceData[] = [
   {
     id: 'residencies',
     title: 'Резиденции',
-    imageUrl: 'public/events/rasm4.png',
+    imageUrl: '/events/rasm4.png',
     description:
       'Платформа для совместной творческой деятельности местных и зарубежных художников.',
     example: 'Резиденциальные программы Art and Culture Development Foundation',
@@ -48,7 +48,7 @@ export const PLACES_DATA: PlaceData[] = [
   {
     id: 'cultural-media',
     title: 'Культурные и медиа-проекты',
-    imageUrl: 'public/events/rasm5.png',
+    imageUrl: '/events/rasm5.png',
     description:
       'Международный проект, объединяющий современное искусство, культурное наследие и креативные индустрии.',
     example: 'Bukhara Biennale',
