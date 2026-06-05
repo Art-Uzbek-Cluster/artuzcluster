@@ -7,6 +7,7 @@ export interface ArtistProfile {
   description: string;
   portraitUrl: string;
   artworkUrl: string;
+  works: Array<{ name: string; url: string }>;
 }
 
 const infoModules = import.meta.glob('../../../images/*/info.txt', {
@@ -42,7 +43,7 @@ const parseInfo = (rawInfo: string | undefined, artistId: string) => {
   const fallback = {
     artistName: artistId.replace(/_/g, ' '),
     artworkName: 'Featured artwork',
-    description: 'Description unavailable. Artist details will be updated soon.',
+    description: '-',
   };
 
   if (!lines.length) {
@@ -57,15 +58,10 @@ const parseInfo = (rawInfo: string | undefined, artistId: string) => {
     ? lines[1]
     : fallback.artworkName;
 
-  const descriptionLines = lines.filter(
-    (line, index) => index !== 0 && line !== artworkLine,
-  );
-  const description = descriptionLines.join(' ') || fallback.description;
-
   return {
     artistName,
     artworkName,
-    description,
+    description: '-',
   };
 };
 
@@ -74,19 +70,37 @@ const getImageUrl = (artistId: string, fileName: string) => {
   return assetModules[assetPath] ?? undefined;
 };
 
+const getArtistWorks = (artistId: string): Array<{ name: string; url: string }> => {
+  const works: Array<{ name: string; url: string }> = [];
+  Object.keys(assetModules).forEach((path) => {
+    if (path.includes(`/${artistId}/work`) && (path.endsWith('.png') || path.endsWith('.jpg') || path.endsWith('.jpeg'))) {
+      const fileName = path.split('/').pop() || '';
+      const url = assetModules[path];
+      works.push({ name: fileName.replace(/\.(png|jpg|jpeg)$/, ''), url });
+    }
+  });
+  return works.sort((a, b) => a.name.localeCompare(b.name));
+};
+
 const buildArtistProfile = (artistId: string): ArtistProfile => {
   const rawInfo = infoModules[`../../../images/${artistId}/info.txt`];
   const parsed = parseInfo(rawInfo, artistId);
+  
+  let displayName = parsed.artistName;
+  if (artistId === 'Ravshan_Choriyev') {
+    displayName = 'Rozi Choriev';
+  }
 
   return {
     id: artistId,
-    artistName: parsed.artistName,
+    artistName: displayName,
     artworkName: parsed.artworkName,
     description: parsed.description,
     portraitUrl:
       getImageUrl(artistId, 'avtoportret.png') ?? getImageUrl(artistId, 'avtoportret.jpg') ?? portraitFallback,
     artworkUrl:
       getImageUrl(artistId, 'mashhur_asar.png') ?? getImageUrl(artistId, 'mashhur_asar.jpg') ?? artworkFallback,
+    works: getArtistWorks(artistId),
   };
 };
 

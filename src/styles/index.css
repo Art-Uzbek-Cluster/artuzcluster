@@ -983,6 +983,327 @@ header {
   z-index: 1;
 }
 
+/* Artist Portrait Card Styles */
+.artists-portrait-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(16px, 3vw, 24px);
+  margin-top: clamp(40px, 8vw, 60px);
+}
+
+.artist-portrait-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.artist-portrait-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: border-color 0.3s ease;
+}
+
+.artist-portrait-image-wrapper:hover {
+  border-color: rgba(124, 58, 237, 0.35);
+}
+
+.artist-portrait-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.artist-portrait-image-wrapper:hover .artist-portrait-image {
+  transform: scale(1.05);
+}
+
+.artist-portrait-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.artist-portrait-image-wrapper:hover .artist-portrait-overlay {
+  opacity: 1;
+}
+
+.artist-portrait-button {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 8px;
+  background: rgba(124, 58, 237, 0.85);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.artist-portrait-image-wrapper:hover .artist-portrait-button {
+  opacity: 1;
+}
+
+.artist-portrait-button:hover {
+  background: rgba(124, 58, 237, 0.95);
+  transform: scale(1.05);
+}
+
+.artist-portrait-caption {
+  padding: 0 8px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.artist-portrait-caption strong {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Artist Modal Styles */
+.artist-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.artist-modal {
+  position: relative;
+  background: var(--surface-strong);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 32px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+  z-index: 41;
+  padding: 32px;
+}
+
+.artist-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  color: var(--text-primary);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.artist-modal-close:hover {
+  background: rgba(124, 58, 237, 0.3);
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+.artist-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.artist-modal-header {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.artist-modal-portrait {
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.artist-modal-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.artist-modal-info h2 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.artist-modal-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.artist-modal-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.artist-modal-gallery h3 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.artist-modal-featured-work {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  aspect-ratio: 4/3;
+}
+
+.artist-modal-work-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-modal-thumbnails {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.artist-modal-thumbnail {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.artist-modal-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-modal-thumbnail:hover {
+  border-color: rgba(124, 58, 237, 0.4);
+  transform: scale(1.05);
+}
+
+.artist-modal-thumbnail.active {
+  border-color: rgba(124, 58, 237, 0.8);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .artist-modal {
+    padding: 24px;
+  }
+
+  .artist-modal-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .artist-modal-portrait {
+    width: 100px;
+    height: 100px;
+  }
+
+  .artist-modal-info h2 {
+    font-size: 1.3rem;
+  }
+
+  .artists-portrait-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .artist-modal {
+    padding: 16px;
+    border-radius: 20px;
+    max-height: 90vh;
+  }
+
+  .artist-modal-close {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .artist-modal-header {
+    gap: 12px;
+  }
+
+  .artist-modal-portrait {
+    width: 80px;
+    height: 80px;
+  }
+
+  .artist-modal-info h2 {
+    font-size: 1.1rem;
+  }
+
+  .artist-modal-thumbnails {
+    gap: 8px;
+  }
+
+  .artist-modal-thumbnail {
+    width: 60px;
+    height: 60px;
+  }
+
+  .artists-portrait-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+}
+
 .experts-grid {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }

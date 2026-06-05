@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { useLocale } from '../../i18n';
 import { ArtistCard } from './ArtistCard';
+import { ArtistModal } from './ArtistModal';
 import { useArtists } from './artistsParser';
+import type { ArtistProfile } from './artistsParser';
 
 const artModules = import.meta.glob('../../../arts/*.{png,jpg,jpeg}', {
   query: '?url',
@@ -30,11 +33,21 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 };
 
-const skeletonCount = 3;
-
 export const ArtistsSection = () => {
   const { t } = useLocale();
-  const { artists, loading } = useArtists();
+  const { artists } = useArtists();
+  const [selectedArtist, setSelectedArtist] = useState<ArtistProfile | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleArtistDetailsClick = (artist: ArtistProfile) => {
+    setSelectedArtist(artist);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedArtist(null), 300);
+  };
 
   return (
     <section className="section artists-section" id="hamjamiyat">
@@ -44,6 +57,7 @@ export const ArtistsSection = () => {
           <h2>{t.home.famousArtists?.title}</h2>
         </div>
 
+        {/* Art works mosaic */}
         <motion.div className="artists-mosaic" initial="hidden" animate="show" variants={containerVariants}>
           {artImages.map((url, index) => (
             <motion.div key={url} className={`mosaic-tile tile-${index + 1}`} variants={itemVariants}>
@@ -52,54 +66,32 @@ export const ArtistsSection = () => {
           ))}
         </motion.div>
 
-        {!loading && artists.length > 0 && (
-          <motion.div className="portrait-mosaic" initial="hidden" animate="show" variants={containerVariants}>
-            {artists.map((artist: any) => (
-              <motion.div key={artist.artistName}
-               className="portrait-tile"
-                variants={itemVariants}
-                >
-                <img src={artist.portraitUrl} 
-                alt={`Portrait of ${artist.artistName}`}
-                 loading="lazy"
+        {/* Artist portraits with details buttons */}
+        {artists.length > 0 && (
+          <motion.div
+            className="artists-portrait-grid"
+            initial="hidden"
+            animate="show"
+            variants={containerVariants}
+          >
+            {artists.map((artist) => (
+              <motion.div key={artist.id} variants={itemVariants}>
+                <ArtistCard
+                  artist={artist}
+                  onDetailsClick={() => handleArtistDetailsClick(artist)}
                 />
-                <div className="portrait-caption">
-                  <strong>{artist.artistName}</strong>
-                </div>
               </motion.div>
             ))}
           </motion.div>
         )}
-
-        <motion.div
-          className="artists-grid"
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {loading
-            ? Array.from({ length: skeletonCount }).map((_, index) => (
-                <motion.article
-                  key={`skeleton-${index}`}
-                  className="artist-skeleton"
-                  variants={itemVariants}
-                >
-                  <div className="skeleton-block skeleton-circle" />
-                  <div className="skeleton-block skeleton-line" />
-                  <div className="skeleton-block skeleton-line short" />
-                  <div className="skeleton-block skeleton-image" />
-                  <div className="skeleton-block skeleton-line" />
-                  <div className="skeleton-block skeleton-line short" />
-                </motion.article>
-              ))
-            : artists.map((artist) => (
-                <motion.div key={artist.id} variants={itemVariants}>
-                  <ArtistCard artist={artist} buttonLabel={t.home.famousArtists?.detailsBtn ?? 'Batafsil'} />
-                </motion.div>
-              ))}
-        </motion.div>
       </div>
+
+      {/* Modal for artist details */}
+      <ArtistModal
+        artist={selectedArtist}
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+      />
     </section>
   );
 };
