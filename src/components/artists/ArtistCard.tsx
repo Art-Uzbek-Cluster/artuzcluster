@@ -21,17 +21,19 @@ export const ArtistCard = ({ artist, onDetailsClick }: ArtistCardProps) => {
           loading="lazy"
         />
         <div className="artist-portrait-overlay" />
-        <motion.button
-          type="button"
-          className="artist-portrait-button"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={onDetailsClick}
-          aria-label={`View details for ${artist.artistName}`}
-        >
-          Batafsil
-        </motion.button>
       </div>
+      
+      <motion.button
+        type="button"
+        className="artist-portrait-button"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={onDetailsClick}
+        aria-label={`View details for ${artist.artistName}`}
+      >
+        Batafsil
+      </motion.button>
+
       <div className="artist-portrait-caption">
         <strong>{artist.artistName}</strong>
       </div>
