@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { getCurrentUser, logoutUser } from "../utils/auth";
 import { useLocale } from "../i18n";
 
 /**
@@ -10,12 +9,6 @@ import { useLocale } from "../i18n";
 export function Header() {
   const { locale, theme, setLocale, toggleTheme, t } = useLocale();
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const currentUser = getCurrentUser();
-
-  const handleLogout = () => {
-    logoutUser();
-    window.location.href = "/";
-  };
 
   return (
     <header>
@@ -74,25 +67,7 @@ export function Header() {
             </button>
           </div>
 
-          {currentUser ? (
-            <>
-              <span className="header-user">
-                {t.header.greeting} {currentUser.username}
-              </span>
-              <button className="logout-button" onClick={handleLogout}>
-                {t.header.logout}
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="header-link">
-                {t.header.login}
-              </Link>
-              <Link to="/register" className="header-button">
-                {t.header.register}
-              </Link>
-            </>
-          )}
+          {/* Auth links removed */}
         </div>
       </div>
     </header>

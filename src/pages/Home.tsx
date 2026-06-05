@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLocale } from '../i18n';
@@ -266,9 +265,6 @@ export function Home() {
               <a href="#about" className="btn-primary">
                 {hero.detailsBtn}
               </a>
-              <Link to="/register" className="btn-secondary">
-                {hero.actionBtn}
-              </Link>
             </div>
           </div>
 
