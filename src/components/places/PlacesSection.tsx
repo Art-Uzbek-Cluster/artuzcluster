@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { useLocale } from '../../i18n';
 import { PlacesModal } from './PlacesModal';
 import { PlaceCard } from './PlaceCard';
 import { PLACES_DATA } from './types';
