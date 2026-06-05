@@ -1020,6 +1020,28 @@ header {
   border-color: rgba(124, 58, 237, 0.5);
 }
 
+.info-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 32px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+  cursor: pointer;
+  display: grid;
+  gap: 22px;
+}
+
+.info-card:hover,
+.direction-card:hover,
+.project-card:hover,
+.partner-card:hover,
+.expert-card:hover,
+.news-card:hover,
+.stat-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(124, 58, 237, 0.5);
+}
+
 .info-card h3,
 .direction-card h3,
 .project-card h3,
@@ -1035,6 +1057,29 @@ header {
 .partner-card p {
   color: var(--text-secondary);
   line-height: 1.8;
+}
+
+.info-card-action {
+  margin-top: auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(124, 58, 237, 0.4);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.9), rgba(99, 102, 241, 0.9));
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.info-card-action:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.95), rgba(99, 102, 241, 0.95));
+  box-shadow: 0 15px 35px rgba(124, 58, 237, 0.25);
 }
 
 .expert-card {

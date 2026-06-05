@@ -37,7 +37,7 @@ export const ArtistsSection = () => {
   const { artists, loading } = useArtists();
 
   return (
-    <section className="section artists-section" id="mashhur-artists">
+    <section className="section artists-section" id="hamjamiyat">
       <div className="container">
         <div className="section-header">
           <span className="eyebrow">{t.home.famousArtists?.eyebrow}</span>

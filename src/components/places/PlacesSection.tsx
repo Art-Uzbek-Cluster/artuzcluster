@@ -24,7 +24,7 @@ export const PlacesSection = () => {
   };
 
   return (
-    <section className="section places-section" id="places">
+    <section className="section places-section" id="joylar">
       <div className="container">
         <motion.div
           className="section-header"

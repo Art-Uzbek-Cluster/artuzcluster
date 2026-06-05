@@ -238,6 +238,22 @@ export function Home() {
     ...externalNews,
   ];
 
+  const sectionMap: Record<string, string> = {
+    Joylar: 'joylar',
+    Dasturlar: 'dasturlar',
+    Hamjamiyat: 'hamjamiyat',
+  };
+
+  const scrollToSection = (sectionTitle: string) => {
+    const sectionId = sectionMap[sectionTitle];
+    if (!sectionId) return;
+
+    const target = document.getElementById(sectionId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <main>
       <section className="hero-section" id="top">
@@ -278,16 +294,39 @@ export function Home() {
           </div>
           <div className="info-grid">
             {about.cards.map((card) => (
-              <article key={card.title} className="info-card">
+              <article
+                key={card.title}
+                className="info-card"
+                role="button"
+                tabIndex={0}
+                aria-label={`Scroll to ${card.title}`}
+                onClick={() => scrollToSection(card.title)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    scrollToSection(card.title);
+                  }
+                }}
+              >
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
+                <button
+                  type="button"
+                  className="info-card-action"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    scrollToSection(card.title);
+                  }}
+                >
+                  {t.home.hero.detailsBtn}
+                </button>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section section-dark" id="directions">
+      <section className="section section-dark" id="dasturlar">
         <div className="container">
           <div className="section-header">
             <span className="eyebrow">{directions.eyebrow}</span>
