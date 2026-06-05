@@ -561,11 +561,6 @@ const translations = {
       news: {
         eyebrow: 'NEWS',
         title: 'Latest updates',
-        items: [
-          { title: 'Registration opened for #OWNCREATIVITY program', date: '29 April 2026' },
-          { title: '"Megaanom" academy launches a new intake', date: '27 April 2026' },
-          { title: 'Creative community expands event network', date: '23 April 2026' },
-        ],
       },
       footer: {
         contact: 'Contact',

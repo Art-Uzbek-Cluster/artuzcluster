@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLocale } from '../i18n';
 import { ArtistsSection } from '../components/artists/ArtistsSection';
+import { PlacesSection } from '../components/places/PlacesSection';
 
 type ExternalNewsItem = {
   title: string;
@@ -347,7 +348,7 @@ export function Home() {
         </div>
       )}
 
-      
+      <PlacesSection />
 
       <ArtistsSection />
 
