@@ -73,7 +73,7 @@ const translations = {
         title: 'Yosh ijodkorlar uchun multi-format san\'at klasteri',
         cards: [
           {
-            title: 'Joylar va makonlar',
+            title: 'JOYLAR VA MAKONLAR',
             description:
               "Butun mamlakatdan ekspertlar va ishtirokchilar uchun ta'lim, ijodiy va jamoat maydonchalari.",
           },
