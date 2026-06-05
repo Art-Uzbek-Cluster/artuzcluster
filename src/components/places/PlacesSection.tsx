@@ -7,7 +7,7 @@ import { PLACES_DATA } from './types';
 import type { PlaceData } from './types';
 
 export const PlacesSection = () => {
-  const { t } = useLocale();
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState<PlaceData | null>(null);
 
