@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useLocale } from '../../i18n';
 import type { PlaceData } from './types';
 
 type PlacesModalProps = {
@@ -9,6 +10,8 @@ type PlacesModalProps = {
 };
 
 export const PlacesModal = ({ places, selectedPlace, onSelectPlace, onClose }: PlacesModalProps) => {
+  const { t } = useLocale();
+
   return (
     <motion.div
       className="places-modal-overlay"
@@ -26,8 +29,8 @@ export const PlacesModal = ({ places, selectedPlace, onSelectPlace, onClose }: P
         onClick={(e) => e.stopPropagation()}
       >
         <div className="places-modal-header">
-          <h2 className="places-modal-title">Места в АРТ-Кластере</h2>
-          <button className="places-modal-close" onClick={onClose} aria-label="Закрыть">
+          <h2 className="places-modal-title">{t.home.places.modalTitle}</h2>
+          <button className="places-modal-close" onClick={onClose} aria-label={t.home.artistModal.closeModal}>
             ✕
           </button>
         </div>
@@ -78,7 +81,7 @@ export const PlacesModal = ({ places, selectedPlace, onSelectPlace, onClose }: P
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.4 }}
         >
-          <p>Выберите раздел, чтобы узнать больше</p>
+          <p>{t.home.places.modalHint}</p>
         </motion.div>
       </motion.div>
     </motion.div>

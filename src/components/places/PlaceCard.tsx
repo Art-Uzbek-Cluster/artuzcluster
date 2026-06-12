@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useLocale } from '../../i18n';
 import type { PlaceData } from './types';
 
 type PlaceCardProps = {
@@ -7,6 +8,8 @@ type PlaceCardProps = {
 };
 
 export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
+  const { t } = useLocale();
+
   return (
     <motion.div
       className="place-card-overlay"
@@ -23,7 +26,7 @@ export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
         transition={{ duration: 0.4, ease: 'easeOut' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <button className="place-card-close" onClick={onClose} aria-label="Закрыть">
+        <button className="place-card-close" onClick={onClose} aria-label={t.home.places.close}>
           ✕
         </button>
 
@@ -54,7 +57,7 @@ export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.4 }}
           >
-            <h3 className="place-card-label">Описание</h3>
+            <h3 className="place-card-label">{t.home.places.card.description}</h3>
             <p className="place-card-text">{place.description}</p>
           </motion.div>
 
@@ -64,7 +67,7 @@ export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.4 }}
           >
-            <h3 className="place-card-label">Пример из Узбекистана</h3>
+            <h3 className="place-card-label">{t.home.places.card.example}</h3>
             <p className="place-card-text place-card-example">{place.example}</p>
           </motion.div>
 
@@ -74,7 +77,7 @@ export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.4 }}
           >
-            <h3 className="place-card-label">Значение и результат</h3>
+            <h3 className="place-card-label">{t.home.places.card.result}</h3>
             <p className="place-card-text place-card-result">{place.result}</p>
           </motion.div>
 
@@ -87,7 +90,7 @@ export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.4 }}
           >
-            Вернуться к списку
+            {t.home.places.card.backButton}
           </motion.button>
         </div>
       </motion.article>

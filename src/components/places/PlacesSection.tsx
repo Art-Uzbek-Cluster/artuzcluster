@@ -1,17 +1,28 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { useLocale } from '../../i18n';
 import { PlacesModal } from './PlacesModal';
 import { PlaceCard } from './PlaceCard';
 import { PLACES_DATA } from './types';
 import type { PlaceData } from './types';
 
 export const PlacesSection = () => {
-  
+  const { t } = useLocale();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState<PlaceData | null>(null);
 
   const handleSelectPlace = (place: PlaceData) => {
     setSelectedPlace(place);
+  };
+
+  const handleOpenPlacesModal = () => {
+    setSelectedPlace(PLACES_DATA[0]);
+    setIsModalOpen(true);
+  };
+
+  const handlePreviewClick = (place: PlaceData) => {
+    setSelectedPlace(place);
+    setIsModalOpen(false);
   };
 
   const handleCloseCard = () => {
@@ -33,11 +44,9 @@ export const PlacesSection = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="eyebrow">МЕСТА И ПРОСТРАНСТВА</span>
-          <h2>Образовательные и творческие центры</h2>
-          <p>
-            Комплекс площадок для экспертов, художников и творцов со всей страны
-          </p>
+          <span className="eyebrow">{t.home.places.eyebrow}</span>
+          <h2>{t.home.places.title}</h2>
+          <p>{t.home.places.subtitle}</p>
         </motion.div>
 
         <motion.div
@@ -51,6 +60,14 @@ export const PlacesSection = () => {
             <motion.div
               key={place.id}
               className="places-preview-card"
+              role="button"
+              tabIndex={0}
+              onClick={() => handlePreviewClick(place)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  handlePreviewClick(place);
+                }
+              }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -78,11 +95,11 @@ export const PlacesSection = () => {
         >
           <motion.button
             className="places-details-btn"
-            onClick={() => setIsModalOpen(true)}
+            onClick={handleOpenPlacesModal}
             whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(124, 58, 237, 0.3)' }}
             whileTap={{ scale: 0.95 }}
           >
-            <span>Подробнее о местах</span>
+            <span>{t.home.places.button}</span>
             <motion.span
               animate={{ x: [0, 4, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
@@ -99,7 +116,10 @@ export const PlacesSection = () => {
           <PlacesModal
             places={PLACES_DATA}
             selectedPlace={selectedPlace}
-            onSelectPlace={handleSelectPlace}
+            onSelectPlace={(place) => {
+              handleSelectPlace(place);
+              setIsModalOpen(false);
+            }}
             onClose={handleCloseModal}
           />
         )}

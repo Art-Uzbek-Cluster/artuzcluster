@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useLocale } from '../../i18n';
 import type { ArtistProfile } from './artistsParser';
 
 type ArtistCardProps = {
@@ -7,6 +8,8 @@ type ArtistCardProps = {
 };
 
 export const ArtistCard = ({ artist, onDetailsClick }: ArtistCardProps) => {
+  const { t } = useLocale();
+
   return (
     <motion.div
       className="artist-portrait-card"
@@ -31,7 +34,7 @@ export const ArtistCard = ({ artist, onDetailsClick }: ArtistCardProps) => {
         onClick={onDetailsClick}
         aria-label={`View details for ${artist.artistName}`}
       >
-        Batafsil
+        {t.home.famousArtists.detailsBtn}
       </motion.button>
 
       <div className="artist-portrait-caption">

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocale } from '../../i18n';
 import type { ArtistProfile } from './artistsParser';
 
 type ArtistModalProps = {
@@ -9,7 +10,12 @@ type ArtistModalProps = {
 };
 
 export const ArtistModal = ({ artist, isOpen, onClose }: ArtistModalProps) => {
+  const { t } = useLocale();
   const [selectedWork, setSelectedWork] = useState<number>(0);
+
+  useEffect(() => {
+    setSelectedWork(0);
+  }, [artist]);
 
   if (!artist) return null;
 
@@ -39,7 +45,7 @@ export const ArtistModal = ({ artist, isOpen, onClose }: ArtistModalProps) => {
               type="button"
               className="artist-modal-close"
               onClick={onClose}
-              aria-label="Close modal"
+              aria-label={t.home.artistModal.closeModal}
             >
               ×
             </button>
@@ -61,7 +67,7 @@ export const ArtistModal = ({ artist, isOpen, onClose }: ArtistModalProps) => {
               {/* Works gallery */}
               {artist.works.length > 0 && (
                 <div className="artist-modal-gallery">
-                  <h3>Asarlar</h3>
+                  <h3>{t.home.artistModal.worksHeading}</h3>
                   <div className="artist-modal-featured-work">
                     <img
                       src={artist.works[selectedWork].url}
