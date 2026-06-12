@@ -710,7 +710,10 @@ header {
 .mosaic-tile.tile-2,
 .mosaic-tile.tile-3,
 .mosaic-tile.tile-4,
-.mosaic-tile.tile-5 {
+.mosaic-tile.tile-5,
+.mosaic-tile.tile-6,
+.mosaic-tile.tile-7,
+.mosaic-tile.tile-8 {
   min-height: clamp(160px, 30vh, 220px);
 }
 
