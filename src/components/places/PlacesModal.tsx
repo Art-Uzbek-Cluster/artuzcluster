@@ -10,7 +10,7 @@ type PlacesModalProps = {
 };
 
 export const PlacesModal = ({ places, selectedPlace, onSelectPlace, onClose }: PlacesModalProps) => {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
 
   return (
     <motion.div
@@ -63,7 +63,7 @@ export const PlacesModal = ({ places, selectedPlace, onSelectPlace, onClose }: P
               whileTap={{ scale: 0.98 }}
             >
               <span className="places-modal-item-number">{String(index + 1).padStart(2, '0')}</span>
-              <span className="places-modal-item-title">{place.title}</span>
+              <span className="places-modal-item-title">{place.title[locale]}</span>
               <motion.span
                 className="places-modal-item-arrow"
                 animate={{ x: selectedPlace?.id === place.id ? 6 : 0 }}

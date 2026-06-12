@@ -7,7 +7,7 @@ import { PLACES_DATA } from './types';
 import type { PlaceData } from './types';
 
 export const PlacesSection = () => {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState<PlaceData | null>(null);
 
@@ -75,12 +75,12 @@ export const PlacesSection = () => {
               whileHover={{ y: -8 }}
             >
               <div className="places-preview-image">
-                <img src={place.imageUrl} alt={place.title} loading="lazy" />
+                <img src={place.imageUrl} alt={place.title[locale]} loading="lazy" />
                 <div className="places-preview-overlay" />
               </div>
               <div className="places-preview-info">
-                <h3>{place.title}</h3>
-                <p>{place.description.substring(0, 80)}...</p>
+                <h3>{place.title[locale]}</h3>
+                <p>{place.description[locale].substring(0, 80)}...</p>
               </div>
             </motion.div>
           ))}

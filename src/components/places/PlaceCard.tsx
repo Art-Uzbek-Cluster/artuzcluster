@@ -8,7 +8,7 @@ type PlaceCardProps = {
 };
 
 export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
 
   return (
     <motion.div
@@ -33,7 +33,7 @@ export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
         <div className="place-card-image-container">
           <motion.img
             src={place.imageUrl}
-            alt={place.title}
+            alt={place.title[locale]}
             className="place-card-image"
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
@@ -48,7 +48,7 @@ export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.4 }}
           >
-            {place.title}
+            {place.title[locale]}
           </motion.h2>
 
           <motion.div
@@ -58,7 +58,7 @@ export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
             transition={{ delay: 0.3, duration: 0.4 }}
           >
             <h3 className="place-card-label">{t.home.places.card.description}</h3>
-            <p className="place-card-text">{place.description}</p>
+            <p className="place-card-text">{place.description[locale]}</p>
           </motion.div>
 
           <motion.div
@@ -68,7 +68,7 @@ export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
             transition={{ delay: 0.4, duration: 0.4 }}
           >
             <h3 className="place-card-label">{t.home.places.card.example}</h3>
-            <p className="place-card-text place-card-example">{place.example}</p>
+            <p className="place-card-text place-card-example">{place.example[locale]}</p>
           </motion.div>
 
           <motion.div
@@ -78,7 +78,7 @@ export const PlaceCard = ({ place, onClose }: PlaceCardProps) => {
             transition={{ delay: 0.5, duration: 0.4 }}
           >
             <h3 className="place-card-label">{t.home.places.card.result}</h3>
-            <p className="place-card-text place-card-result">{place.result}</p>
+            <p className="place-card-text place-card-result">{place.result[locale]}</p>
           </motion.div>
 
           <motion.button
