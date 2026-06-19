@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Home } from "./pages/Home";
 import { LocaleProvider } from "./i18n";
+import { Analytics } from "@vercel/analytics/next"
 
 
 /**
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
+        <Analytics />
       </Router>
     </LocaleProvider>
   );
